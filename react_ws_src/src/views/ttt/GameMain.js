@@ -141,8 +141,24 @@ export default class SetName extends Component {
 					</table>
 				</div>
 
-				<button type='submit' onClick={this.end_game.bind(this)} className='button'><span>End Game <span className='fa fa-caret-right'></span></span></button>
-
+        <button
+          type="submit"
+          onClick={this.end_game.bind(this)}
+          className="button"
+        >
+          <span>
+            End Game <span className="fa fa-caret-right"></span>
+          </span>
+        </button>
+        <button
+          type="submit"
+          onClick={this.replay_game.bind(this)}
+          className="button"
+        >
+          <span>
+            Replay <span className="fa fa-caret-right"></span>
+          </span>
+        </button>
 			</div>
 		)
 	}
@@ -332,7 +348,24 @@ export default class SetName extends Component {
 
 //	------------------------	------------------------	------------------------
 
-	end_game () {
+  replay_game() {
+    // Remove winning classes from cells
+    Object.keys(this.refs).forEach((ref) => {
+      if (this.refs[ref].classList.contains("win")) {
+        this.refs[ref].classList.remove("win");
+      }
+    });
+
+    // Reset state
+    this.setState({
+      cell_vals: {},
+      next_turn_ply: true,
+      game_play: true,
+      game_stat: "Start game",
+    });
+  }
+
+  end_game() {
 		this.socket && this.socket.disconnect();
 
 		this.props.onEndGame()
