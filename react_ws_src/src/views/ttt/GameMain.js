@@ -154,6 +154,7 @@ export default class SetName extends Component {
           type="submit"
           onClick={this.replay_game.bind(this)}
           className="button"
+          style={{ marginLeft: "10px" }}
         >
           <span>
             Replay <span className="fa fa-caret-right"></span>
